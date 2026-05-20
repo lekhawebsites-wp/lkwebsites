@@ -1,0 +1,570 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>WordPress & WooCommerce Developer — Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --cream: #F4F8F8;
+    --dark: #0D3D40;
+    --ink: #1A2E30;
+    --muted: #5E7E80;
+    --border: #D4E4E5;
+    --accent: #0A8A8A;
+    --accent-light: #E0F4F4;
+    --green: #0D6B5E;
+    --green-light: #E0F2EE;
+    --blue: #0D4A6B;
+    --blue-light: #E0EEF5;
+    --gold: #7A6010;
+    --gold-light: #F5EFDC;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--cream);
+    color: var(--ink);
+    line-height: 1.6;
+  }
+
+  /* HEADER */
+  header {
+    background: var(--dark);
+    color: var(--cream);
+    padding: 5rem 2rem 4rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  header::before {
+    content: '';
+    position: absolute;
+    top: -60px; right: -60px;
+    width: 320px; height: 320px;
+    border-radius: 50%;
+    border: 1px solid rgba(255,255,255,0.08);
+  }
+
+  header::after {
+    content: '';
+    position: absolute;
+    bottom: -40px; left: -40px;
+    width: 200px; height: 200px;
+    border-radius: 50%;
+    border: 1px solid rgba(255,255,255,0.04);
+  }
+
+  .header-inner {
+    max-width: 860px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 1;
+  }
+
+  .eyebrow {
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--accent);
+    font-weight: 500;
+    margin-bottom: 1rem;
+  }
+
+  h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2rem, 5vw, 3.2rem);
+    font-weight: 500;
+    line-height: 1.2;
+    color: #fff;
+    margin-bottom: 1rem;
+  }
+
+  .header-sub {
+    font-size: 16px;
+    color: rgba(255,255,255,0.55);
+    font-weight: 300;
+    max-width: 540px;
+    margin-bottom: 2.5rem;
+  }
+
+  .stat-strip {
+    display: flex;
+    gap: 2.5rem;
+    flex-wrap: wrap;
+    padding-top: 2rem;
+    border-top: 1px solid rgba(255,255,255,0.1);
+  }
+
+  .stat { }
+  .stat-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 28px;
+    color: #fff;
+    display: block;
+  }
+  .stat-label {
+    font-size: 12px;
+    color: rgba(255,255,255,0.4);
+    letter-spacing: 0.04em;
+  }
+
+  .skills-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 2rem;
+  }
+
+  .skill-pill {
+    font-size: 12px;
+    padding: 4px 12px;
+    border-radius: 20px;
+    border: 1px solid rgba(255,255,255,0.12);
+    color: rgba(255,255,255,0.6);
+    font-weight: 300;
+  }
+
+  /* MAIN */
+  main {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 3rem 2rem 5rem;
+  }
+
+  .section-eyebrow {
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--muted);
+    font-weight: 500;
+    margin-bottom: 2rem;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .section-eyebrow::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+  }
+
+  /* PROJECT CARDS */
+  .project {
+    margin-bottom: 3rem;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    overflow: hidden;
+    background: #fff;
+    transition: box-shadow 0.2s;
+  }
+
+  .project:hover {
+    box-shadow: 0 8px 32px rgba(26,24,20,0.08);
+  }
+
+  .project-header {
+    padding: 2rem 2rem 1.5rem;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+
+  .project-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 20px;
+    font-weight: 500;
+    color: var(--dark);
+    margin-bottom: 4px;
+  }
+
+  .project-meta {
+    font-size: 13px;
+    color: var(--muted);
+  }
+
+  .badge {
+    font-size: 11px;
+    font-weight: 500;
+    padding: 4px 12px;
+    border-radius: 20px;
+    white-space: nowrap;
+    letter-spacing: 0.03em;
+  }
+
+  .badge-corp { background: var(--blue-light); color: var(--blue); }
+  .badge-ecom { background: var(--green-light); color: var(--green); }
+  .badge-multi { background: var(--gold-light); color: var(--gold); }
+  .badge-brand { background: var(--accent-light); color: var(--accent); }
+  .badge-intl { background: #F0EBF5; color: #5A2A8A; }
+
+  .project-body { padding: 1.75rem 2rem; }
+
+  .project-desc {
+    font-size: 15px;
+    color: var(--ink);
+    line-height: 1.7;
+    margin-bottom: 1.5rem;
+    font-weight: 300;
+  }
+
+  .highlights {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+    gap: 10px;
+    margin-bottom: 1.5rem;
+  }
+
+  .hl {
+    background: var(--cream);
+    border-radius: 8px;
+    padding: 10px 14px;
+    border: 1px solid var(--border);
+  }
+
+  .hl-label { font-size: 11px; color: var(--muted); margin-bottom: 3px; letter-spacing: 0.03em; }
+  .hl-val { font-size: 13px; font-weight: 500; color: var(--dark); }
+
+  .tools {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-bottom: 1.5rem;
+  }
+
+  .tool {
+    font-size: 12px;
+    padding: 3px 10px;
+    background: var(--cream);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    color: var(--muted);
+  }
+
+  .testimonial {
+    background: var(--cream);
+    border-radius: 8px;
+    padding: 1.25rem 1.5rem;
+    border-left: 3px solid var(--accent);
+    margin-bottom: 1.25rem;
+  }
+
+  .test-text {
+    font-size: 14px;
+    color: var(--ink);
+    line-height: 1.7;
+    font-style: italic;
+    margin-bottom: 8px;
+    font-weight: 300;
+  }
+
+  .test-author {
+    font-size: 12px;
+    color: var(--muted);
+    font-weight: 500;
+  }
+
+  .project-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 13px;
+    color: var(--accent);
+    text-decoration: none;
+    font-weight: 500;
+    padding: 6px 0;
+  }
+
+  .project-link:hover { text-decoration: underline; }
+
+  .offline-note {
+    font-size: 12px;
+    color: var(--muted);
+    background: var(--cream);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 8px 14px;
+    margin-top: 12px;
+    line-height: 1.6;
+  }
+
+  /* FOOTER CTA */
+  .cta {
+    background: var(--dark);
+    border-radius: 12px;
+    padding: 2.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    margin-top: 3rem;
+  }
+
+  .cta-left h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 22px;
+    color: #fff;
+    font-weight: 500;
+    margin-bottom: 6px;
+  }
+
+  .cta-left p {
+    font-size: 14px;
+    color: rgba(255,255,255,0.45);
+    font-weight: 300;
+  }
+
+  .cta-btn {
+    display: inline-block;
+    background: var(--accent);
+    color: #fff;
+    font-size: 14px;
+    font-weight: 500;
+    padding: 12px 28px;
+    border-radius: 6px;
+    text-decoration: none;
+    letter-spacing: 0.02em;
+    transition: opacity 0.2s;
+    white-space: nowrap;
+  }
+
+  .cta-btn:hover { opacity: 0.88; }
+
+  /* ANIMATIONS */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(18px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  .project {
+    animation: fadeUp 0.5s ease both;
+  }
+
+  .project:nth-child(1) { animation-delay: 0.05s; }
+  .project:nth-child(2) { animation-delay: 0.12s; }
+  .project:nth-child(3) { animation-delay: 0.19s; }
+  .project:nth-child(4) { animation-delay: 0.26s; }
+  .project:nth-child(5) { animation-delay: 0.33s; }
+
+  /* RESPONSIVE */
+  @media (max-width: 600px) {
+    header { padding: 3rem 1.25rem 2.5rem; }
+    main { padding: 2rem 1.25rem 4rem; }
+    .project-header { flex-direction: column; }
+    .stat-strip { gap: 1.5rem; }
+    .cta { flex-direction: column; }
+    .project-body { padding: 1.25rem; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <div class="eyebrow">WordPress Developer & WooCommerce Specialist</div>
+    <h1>12+ years building and integrating WordPress sites — custom templates, career systems, eCommerce, payment gateways, and multilingual setups for international clients.</h1>
+    <p class="header-sub">Corporate sites, international eCommerce, multilingual stores — delivered for startups, MNCs, and founders across India, Bahrain, Kuwait, and Europe.</p>
+
+    <div class="skills-row">
+      <span class="skill-pill">WordPress</span>
+      <span class="skill-pill">WooCommerce</span>
+      <span class="skill-pill">Elementor</span>
+      <span class="skill-pill">Divi</span>
+      <span class="skill-pill">WPBakery</span>
+      <span class="skill-pill">WPML</span>
+      <span class="skill-pill">RazorPay</span>
+      <span class="skill-pill">Payment Gateways</span>
+      <span class="skill-pill">Page Speed</span>
+      <span class="skill-pill">SEO</span>
+      <span class="skill-pill">PHP / MySQL</span>
+      <span class="skill-pill">RTL / Arabic</span>
+    </div>
+
+    <div class="stat-strip">
+      <div class="stat">
+        <span class="stat-num">12+</span>
+        <span class="stat-label">Years experience</span>
+      </div>
+      <div class="stat">
+        <span class="stat-num">4+</span>
+        <span class="stat-label">Countries delivered</span>
+      </div>
+      <div class="stat">
+        <span class="stat-num">MNC</span>
+        <span class="stat-label">Client level</span>
+      </div>
+      <div class="stat">
+        <span class="stat-num">2</span>
+        <span class="stat-label">Payment gateways integrated</span>
+      </div>
+    </div>
+  </div>
+</header>
+
+<main>
+  <div class="section-eyebrow">Selected Projects</div>
+
+  <!-- PROJECT 1: 10xDS -->
+  <div class="project">
+    <div class="project-header">
+      <div>
+        <div class="project-name">10xDS — Exponential Digital Solutions</div>
+        <div class="project-meta">Bahrain &middot; Corporate Site &middot; Launched Nov 2016</div>
+      </div>
+      <span class="badge badge-corp">Corporate</span>
+    </div>
+    <div class="project-body">
+      <p class="project-desc">Developed the full WordPress site for an international RPA startup — built custom templates, a job listing and careers system, email subscription and newsletter integration, an event management system, and page speed optimisation. Worked as part of a team alongside a designer.</p>
+      <div class="highlights">
+        <div class="hl"><div class="hl-label">Client type</div><div class="hl-val">International startup</div></div>
+        <div class="hl"><div class="hl-label">Scope</div><div class="hl-val">Logo + full site</div></div>
+        <div class="hl"><div class="hl-label">Market</div><div class="hl-val">Bahrain / MENA</div></div>
+        <div class="hl"><div class="hl-label">Speciality</div><div class="hl-val">Speed + SEO</div></div>
+      </div>
+      <div class="tools">
+        <span class="tool">WordPress</span><span class="tool">WP Rocket</span><span class="tool">W3 Total Cache</span><span class="tool">Contact Form 7</span><span class="tool">Job Manager Plugin</span><span class="tool">Event Manager Plugin</span><span class="tool">PHP / MySQL</span><span class="tool">Adobe Illustrator</span>
+      </div>
+      <div class="testimonial">
+        <p class="test-text">"The team truly embodied the spirit of partnership — questioning, debating, challenging and working collaboratively... Not an easy task when all 7 founders have different perspectives. Strongly recommend to all business houses who want partners and not vendors."</p>
+        <div class="test-author">— Binu Koshy, 10xDS</div>
+      </div>
+      <a class="project-link" href="https://10xds.com" target="_blank">
+        <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+        10xds.com
+      </a>
+    </div>
+  </div>
+
+  <!-- PROJECT 2: Seven Seas Group -->
+  <div class="project">
+    <div class="project-header">
+      <div>
+        <div class="project-name">Seven Seas Group</div>
+        <div class="project-meta">Corporate &middot; WordPress</div>
+      </div>
+      <span class="badge badge-corp">Corporate</span>
+    </div>
+    <div class="project-body">
+      <p class="project-desc">Corporate WordPress website design and development for Seven Seas Group — a professional multi-page site built to reflect the brand's international standing and communicate their services clearly across markets.</p>
+      <div class="highlights">
+        <div class="hl"><div class="hl-label">Client type</div><div class="hl-val">Corporate group</div></div>
+        <div class="hl"><div class="hl-label">Scope</div><div class="hl-val">Full corporate site</div></div>
+        <div class="hl"><div class="hl-label">Focus</div><div class="hl-val">Design + dev</div></div>
+      </div>
+      <div class="tools">
+        <span class="tool">WordPress</span><span class="tool">Custom CSS</span><span class="tool">PHP / MySQL</span><span class="tool">Responsive Design</span>
+      </div>
+      <a class="project-link" href="https://sevenseasgroup.com" target="_blank">
+        <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+        sevenseasgroup.com
+      </a>
+    </div>
+  </div>
+
+  <!-- PROJECT 3: Annette Meyer Studio -->
+  <div class="project">
+    <div class="project-header">
+      <div>
+        <div class="project-name">Annette Meyer Studio</div>
+        <div class="project-meta">Copenhagen, Denmark &middot; Portfolio / Brand site &middot; WordPress</div>
+      </div>
+      <span class="badge badge-intl">International</span>
+    </div>
+    <div class="project-body">
+      <p class="project-desc">WordPress portfolio site for a Copenhagen-based fashion designer and artist whose work spans couture installation, interior design, and exhibition design across international museums and galleries. The site integrates bilingual support (English/Danish) and showcases visual-heavy creative work with a refined, editorial aesthetic.</p>
+      <div class="highlights">
+        <div class="hl"><div class="hl-label">Client type</div><div class="hl-val">Creative studio</div></div>
+        <div class="hl"><div class="hl-label">Market</div><div class="hl-val">Copenhagen / Global</div></div>
+        <div class="hl"><div class="hl-label">Languages</div><div class="hl-val">English + Danish</div></div>
+        <div class="hl"><div class="hl-label">Sector</div><div class="hl-val">Fashion / Art / Design</div></div>
+      </div>
+      <div class="tools">
+        <span class="tool">WordPress</span><span class="tool">Custom Design</span><span class="tool">Bilingual</span><span class="tool">Responsive</span><span class="tool">Portfolio Layout</span>
+      </div>
+      <a class="project-link" href="https://www.annettemeyerstudio.com" target="_blank">
+        <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+        annettemeyerstudio.com
+      </a>
+    </div>
+  </div>
+
+  <!-- PROJECT 4: Arundhati Astrology -->
+  <div class="project">
+    <div class="project-header">
+      <div>
+        <div class="project-name">Arundhati Astrology</div>
+        <div class="project-meta">India &middot; WooCommerce eCommerce &middot; Launched Sep 2020</div>
+      </div>
+      <span class="badge badge-ecom">eCommerce</span>
+    </div>
+    <div class="project-body">
+      <p class="project-desc">Developed a WooCommerce store for a Vedic astrologer — integrated RazorPay payment gateway, built the shop and service listing, and delivered a fully responsive site.</p>
+      <div class="highlights">
+        <div class="hl"><div class="hl-label">Client type</div><div class="hl-val">Solo practitioner</div></div>
+        <div class="hl"><div class="hl-label">Payment</div><div class="hl-val">RazorPay</div></div>
+        <div class="hl"><div class="hl-label">Design</div><div class="hl-val">Custom mockup</div></div>
+        <div class="hl"><div class="hl-label">Scope</div><div class="hl-val">UI + Dev</div></div>
+      </div>
+      <div class="tools">
+        <span class="tool">WordPress</span><span class="tool">WooCommerce</span><span class="tool">RazorPay</span><span class="tool">Custom CSS</span><span class="tool">PHP / MySQL</span><span class="tool">JavaScript</span>
+      </div>
+      <a class="project-link" href="https://arundhatiastrology.com" target="_blank">
+        <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+        arundhatiastrology.com
+      </a>
+    </div>
+  </div>
+
+  <!-- PROJECT 5: FSL Kuwait -->
+  <div class="project">
+    <div class="project-header">
+      <div>
+        <div class="project-name">FSL Lighting — Kuwait eStore</div>
+        <div class="project-meta">Kuwait &middot; Multilingual WooCommerce &middot; Launched Oct 2020</div>
+      </div>
+      <span class="badge badge-multi">Multilingual</span>
+    </div>
+    <div class="project-body">
+      <p class="project-desc">Developed a bilingual WooCommerce store for FSL Lighting Kuwait — implemented WPML for English/Arabic RTL support, integrated the Hesabe payment gateway, built city-based delivery logic, discount coupon system, and JS animations. Part of a team; development was my sole responsibility.</p>
+      <div class="highlights">
+        <div class="hl"><div class="hl-label">Languages</div><div class="hl-val">English + Arabic RTL</div></div>
+        <div class="hl"><div class="hl-label">Payment</div><div class="hl-val">Hesabe gateway</div></div>
+        <div class="hl"><div class="hl-label">Market</div><div class="hl-val">Kuwait</div></div>
+        <div class="hl"><div class="hl-label">Complexity</div><div class="hl-val">High</div></div>
+      </div>
+      <div class="tools">
+        <span class="tool">WordPress</span><span class="tool">Elementor</span><span class="tool">WooCommerce</span><span class="tool">WPML</span><span class="tool">Hesabe</span><span class="tool">JS Animation</span><span class="tool">jQuery</span><span class="tool">PHP / MySQL</span>
+      </div>
+      <div class="testimonial">
+        <p class="test-text">"Imajine helped FSL lay the envisaged digital end-state which we visualized and transformed via enhanced user experience. Am impressed with their level of expertise and the support extended. Imajineweb is a valued partner in our digital journey."</p>
+        <div class="test-author">— Abdullah Al Aiban, FSL Kuwait</div>
+      </div>
+      <div class="offline-note">
+        ℹ️ The FSL store is no longer live — the business closed after launch. This project is presented based on delivered work and client testimonial.
+      </div>
+    </div>
+  </div>
+
+  <!-- CTA -->
+  <div class="cta">
+    <div class="cta-left">
+      <h2>Let's work together.</h2>
+      <p>Available for WooCommerce stores, corporate WordPress sites, speed fixes, redesigns & multilingual setups.</p>
+    </div>
+    <a class="cta-btn" href="mailto:lekhawebsites@gmail.com">Get in touch →</a>
+  </div>
+
+</main>
+
+</body>
+</html>
